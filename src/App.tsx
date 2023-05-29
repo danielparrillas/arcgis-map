@@ -3,6 +3,10 @@ import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
+import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import config from "@arcgis/core/config";
+
+config.apiKey = "";
 
 function App() {
   const mapDiv = useRef(null);
@@ -46,6 +50,10 @@ function App() {
           console.log("No bookmarks in this webmap.");
         }
       });
+      const trailheadsLayer = new FeatureLayer({
+        url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0",
+      });
+      view.map.add(trailheadsLayer);
     }
   }, []);
 
