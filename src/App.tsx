@@ -1,15 +1,21 @@
-import { useRef, useEffect } from "react";
+//🌎 arcgis
 import Bookmarks from "@arcgis/core/widgets/Bookmarks";
 import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import config from "@arcgis/core/config";
+//🎉 third party
+import { useRef, useEffect } from "react";
+//📒mine
+import { useMapStore } from "./hooks/mapStore";
+import Test from "./components/Test";
 
 config.apiKey =
   "AAPKd049885b0910426db536781c03b20661HIFgGhU3Hh7xnuoUq8lhAvUhEysGdin0RrXYMAotKJjivYAmbr0Pn7EKiOAOSBeB";
 
 function App() {
+  const { view, setView } = useMapStore();
   const mapDiv = useRef(null);
 
   useEffect(() => {
@@ -27,48 +33,16 @@ function App() {
         container: mapDiv.current,
         map: webmap,
       });
-
-      const bookmarks = new Bookmarks({
-        view,
-        // allows bookmarks to be added, edited, or deleted
-        editingEnabled: true,
-      });
-
-      const bkExpand = new Expand({
-        view,
-        content: bookmarks,
-        expanded: true,
-      });
-
-      // Add the widget to the top-right corner of the view
-      view.ui.add(bkExpand, "top-right");
-
-      // bonus - how many bookmarks in the webmap?
-      webmap.when(() => {
-        if (webmap.bookmarks && webmap.bookmarks.length) {
-          console.log("Bookmarks: ", webmap.bookmarks.length);
-        } else {
-          console.log("No bookmarks in this webmap.");
-        }
-      });
-
-      const popupTrailheads = {
-        title: "Trailhead",
-        content:
-          "<b>Trail:</b> {TRL_NAME}<br><b>City:</b> {CITY_JUR}<br><b>Cross Street:</b> {X_STREET}<br><b>Parking:</b> {PARKING}<br><b>Elevation:</b> {ELEV_FT} ft",
-      };
-
-      const trailheads = new FeatureLayer({
-        url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads_Styled/FeatureServer/0",
-        outFields: ["TRL_NAME", "CITY_JUR", "X_STREET", "PARKING", "ELEV_FT"],
-        popupTemplate: popupTrailheads,
-      });
-
-      view.map.add(trailheads);
+      setView(view);
     }
   }, []);
 
-  return <div className="mapDiv w-screen h-screen" ref={mapDiv}></div>;
+  return (
+    <div>
+      <div className="mapDiv w-screen h-screen" ref={mapDiv}></div>
+      <Test />
+    </div>
+  );
 }
 
 export default App;
