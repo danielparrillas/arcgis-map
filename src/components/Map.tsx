@@ -20,5 +20,5 @@ export default function Map() {
     }
   }, []);
 
-  return <div className="mapDiv w-screen h-screen" ref={mapDiv}></div>;
+  return <div className="mapDiv w-full h-screen" ref={mapDiv}></div>;
 }

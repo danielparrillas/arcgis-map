@@ -5,9 +5,9 @@ import Test from "./components/Test";
 
 function App() {
   return (
-    <div>
-      <Map />
+    <div className="overflow-hidden flex">
       <Test />
+      <Map />
     </div>
   );
 }
