@@ -25,7 +25,7 @@ export default function Test() {
     }
   }, [view]);
 
-  return <div className="bg-neutral-800 text-white p-4">Menu</div>;
+  return <div className="bg-white text-neutral-800 p-4">Menu</div>;
 }
 
 // const bookmarks = new Bookmarks({
