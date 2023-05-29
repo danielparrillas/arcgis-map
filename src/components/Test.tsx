@@ -1,8 +1,4 @@
 //🌎 arcgis
-import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-import Expand from "@arcgis/core/widgets/Expand";
-import MapView from "@arcgis/core/views/MapView";
-import WebMap from "@arcgis/core/WebMap";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 //📒mine
 import { useMapStore } from "../hooks/mapStore";
@@ -29,7 +25,7 @@ export default function Test() {
     }
   }, [view]);
 
-  return <></>;
+  return <div></div>;
 }
 
 // const bookmarks = new Bookmarks({
